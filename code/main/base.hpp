@@ -9,15 +9,15 @@ class base
 		void Render (void);
 		void GetAjaxValues (void);
 		void SetCallback_submit (void (*callback)(void));
-		void Set_dynamicVariable (String value);
-		String Get_dynamicVariable ();
 		void Set_dynamicVariable2 (String value);
 		String Get_dynamicVariable2 ();
+		void Set_dynamicVariable (String value);
+		String Get_dynamicVariable ();
 	private:
 		void Submit_Callback(void);
 		void(*submit_UserCallback)(void);
 		ESP8266WebServer* server;
 
-		String dynamicVariable;
 		String dynamicVariable2;
+		String dynamicVariable;
 };

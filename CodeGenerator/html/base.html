@@ -32,7 +32,7 @@
 		</tr>
 		<tr>
 			<td><strong>To c++: </strong></td>
-			<td><input type="text" id="dynamicVariable2"onchange="updateValues()"></strong></td>
+			<td><input type="text" id="dynamicVariable2"onchange="updateDynamicVariable2()"></strong></td>
 			<td>
 				<form action="submit" method="post" >
 					<button class="button" id="submitBtn" type="submit" name="action" value="" >übernehmen</button>
@@ -51,10 +51,28 @@
 	}
 
 	document.getElementById("dynamicVariable").innerHTML = values.dynamicVariable
+	interval = setInterval(updateValues, 1000)
 
-	function updateValues()
+	function updateDynamicVariable2()
 	{
 		values.dynamicVariable2 = document.getElementById("dynamicVariable2").value
 		document.getElementById("submitBtn").value = JSON.stringify(values)
 	}
+
+	function updateValues()
+	{
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			pairs = this.responseText.split(";");
+			for(let i = 0; i < pairs.length; i++)
+			{
+				pair = pairs[i].split(':');
+				values[pair[0]] = pair[1];
+				document.getElementById(pair[0]).innerHTML = pair[1]
+			}
+		}
+		xhttp.open("GET", "getValues", true);
+		xhttp.send();
+	}
+
 </script>

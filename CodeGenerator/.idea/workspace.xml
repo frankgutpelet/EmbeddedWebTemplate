@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/html/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../code/main/base.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../code/main/base.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../code/main/base.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../code/main/base.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../code/main/main.ino" beforeDir="false" afterPath="$PROJECT_DIR$/../code/main/main.ino" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
