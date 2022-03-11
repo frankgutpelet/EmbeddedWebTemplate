@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<link rel="stylesheet" style="text/css">
+<meta content="de" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Viano Standheizung</title>
+<style type="text/css">
+
+
+html {
+  background: linear-gradient(to bottom right, navy, black);
+ 	background-repeat: no-repeat;
+ 	min-height: 100%;
+}
+body {
+
+}
+
+.button2 {
+  display: inline-block;
+  padding: 30px 45px;
+  font-size: 35px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: silver;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 9px darkblue;
+}
+.auto-style-headline {
+    text-transform: uppercase;
+    font-family: verdana;
+    font-size: 3em;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191,
+        1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2);
+}
+.auto-style2 {
+    font-family: verdana;
+    font-size: 1em;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191,
+    1px 5px 3px rgba(16,16,16,0.4),
+    1px 10px 5px rgba(16,16,16,0.2);
+}
+.auto-style-version {
+	text-align: right;
+	text-align: top;
+    font-family: verdana;
+    font-size: 0.6em;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191,
+    1px 2px 1px rgba(16,16,16,0.4),
+    1px 4px 2px rgba(16,16,16,0.2);
+}
+.auto-style3 {
+	border-style: solid;
+	border-width: 1px;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 35px;
+  background: #silver;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 35px;
+  background: darkblue;
+  cursor: pointer;
+}
+.dotOn {
+  height: 25px;
+  width: 25px;
+  background-color: #f00;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dotOff {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
+</head>
+<body>
+<p id="version" class="auto-style-version">Version: ?</p>
+<p class="auto-style-headline" align="center">Standheizung</p>
+<table class="auto-style3" style="width: 100%">
+	<tr>
+		<td class="auto-style2" style="width: 484px"><strong>Temperatur (Ist)</strong></td>
+		<td class="auto-style2"><strong id="tempIst"></strong></td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 484px"><strong>Temperatur (Soll)</strong></td>
+		<td class="auto-style2"><strong id="tempSoll"></strong></td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 484px"><strong>Timer</strong></td>
+		<td id="timerColumn" class="auto-style2"><strong id="timer"></strong></td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 484px"><strong>Turbo</strong></td>
+		<td id="timerColumn" class="auto-style2"><strong id="turbo"></strong></td>
+	</tr>
+	<tr>
+		<td class="auto-style2" style="width: 484px"><strong>Status</strong></td>
+		<td id="timerColumn" class="auto-style2"><strong id="state"></strong><td><span id="burn" class="dotOff"></span></td><td><span id="burnTurbo" class="dotOff"></span></td>
+	</tr>
+</table>
+</p>
+<table  class="auto-style3" style="width: 100%">
+	<tr>
+		 <p class="auto-style2">Timer:</p>
+		<div class="slidecontainer">
+			<input id="slider" type="range" min="1" max="90" value={{ timer }} class="slider" id="timer" onchange="sliderChange()">
+		</div>
+		</p>
+	</tr>
+</p>
+	<tr>
+		<p class="auto-style2">Temperatur:</p>
+		<div class="slidecontainer">
+			<input id="slider2" type="range" min="20" max="60" value={{ timer }} class="slider" id="temp" onchange="slider2Change()">
+		</div>
+		</p>
+	</tr>
+	<tr>
+		<p class="auto-style2">Drehzahl:</p>
+		<div class="slidecontainer">
+			<input id="slider3" type="range" min="0" max="255" value={{ timer }} class="slider" id="temp" onchange="slider3Change()">
+		</div>
+		</p>
+	</tr>
+</table>
+</p>
+<table style="width: 100%">
+	<tr>
+		<td>
+			<form action="submit" method="post" >
+				<button class="button2" id="submitBtn" type="submit" name="action" value="" >übernehmen</button>
+			</form>
+		</td>
+		<td>
+			<form action="submit" method="get" >
+				<p class="button2" type="submit" onclick="Off()">Aus</p>
+			</form>
+		</td>
+		<td>
+			<form action="submit" method="get" >
+				<p class="button2" type="submit" onclick="turbo()">Turbo</p>
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
+<script>
+
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	console.log(urlParams)
+	console.log(urlParams.get("tempIst"))
+
+	var values = {
+		"timer" : "dynamic",
+		"tempIst" : "dynamic",
+		"tempSoll" : "dynamic",
+		"calibrated" : "dynamic",
+		"version" : "dynamic",
+		"state" : "dynamic",
+		"heating" : "dynamic",
+		"turbo" : "dynamic",
+		"speed" : "dynamic"}
+
+	document.getElementById("version").innerHTML = "Version: " + values.version
+	updateValues()
+	interval = setInterval(updateValues, 1000)
+
+	function UpdateAll()
+	{
+		document.getElementById("slider").value = values.timer
+		document.getElementById("slider2").value = values.tempSoll * 2
+		document.getElementById("tempIst").innerHTML = values.tempIst + "°C"
+		document.getElementById("tempSoll").innerHTML = values.tempSoll + "°C"
+		document.getElementById("state").innerHTML = values.state
+		document.getElementById("turbo").innerHTML = values.turbo
+		document.getElementById("submitBtn").value = JSON.stringify(values)
+		if (values.timer >= 61)
+		{
+			document.getElementById("timer").innerHTML = "Dauer"
+		}
+		else
+		{
+			document.getElementById("timer").innerHTML = values.timer + "min"
+		}
+		if (values.heating == "ON")
+		{
+			document.getElementById("burn").classList.add("dotOn")
+			document.getElementById("burn").classList.remove("dotOff")
+			if ("ON" == values.turbo)
+			{
+				document.getElementById("burnTurbo").classList.add("dotOn")
+				document.getElementById("burnTurbo").classList.remove("dotOff")
+			}
+			else
+			{
+				document.getElementById("burnTurbo").classList.add("dotOff")
+				document.getElementById("burnTurbo").classList.remove("dotOn")
+			}
+		}
+		else
+		{
+			document.getElementById("burn").classList.add("dotOff")
+			document.getElementById("burn").classList.remove("dotOn")
+			document.getElementById("burnTurbo").classList.add("dotOff")
+			document.getElementById("burnTurbo").classList.remove("dotOn")
+
+		}
+	}
+	function Off()
+	{
+		clearInterval(interval)
+		values.state = "OFF"
+		document.getElementById("state").innerHTML = "OFF (übernehmen)"
+		document.getElementById("submitBtn").value = JSON.stringify(values)
+	}
+
+	function turbo()
+	{
+		clearInterval(interval)
+		if("OFF" == values.turbo)
+		{
+			values.turbo = "ON"
+		}
+		else
+		{
+			values.turbo = "OFF"
+		}
+		document.getElementById("turbo").innerHTML = values.turbo + " (übernehmen)"
+		document.getElementById("submitBtn").value = JSON.stringify(values)
+	}
+
+	function sliderChange()
+	{
+		clearInterval(interval)
+		values.timer = Math.round(document.getElementById("slider").value)
+		if (values.timer > 60)
+		{
+			values.timer = 61
+			document.getElementById("timer").innerHTML = "Dauer (übernehmen)"
+			document.getElementById("submitBtn").value = JSON.stringify(values)
+		}
+		else
+		{
+			document.getElementById("timer").innerHTML = values.timer + "min (übernehmen)"
+			document.getElementById("submitBtn").value = JSON.stringify(values)
+		}
+	}
+	function slider2Change()
+	{
+		clearInterval(interval)
+		values.tempSoll = document.getElementById("slider2").value/2
+		document.getElementById("tempSoll").innerHTML = values.tempSoll + "°C (übernehmen)"
+		document.getElementById("submitBtn").value = JSON.stringify(values)
+
+	}
+	function slider3Change()
+	{
+		clearInterval(interval)
+		values.speed = document.getElementById("slider3").value
+		document.getElementById("submitBtn").value = JSON.stringify(values)
+
+	}
+	function updateValues()
+	{
+		document.getElementById("tempSoll").innerHTML = "update"
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			document.getElementById("tempSoll").innerHTML = "response"
+			pairs = this.responseText.split(";");
+			for(let i = 0; i < pairs.length; i++)
+			{
+				pair = pairs[i].split(':');
+				values[pair[0]] = pair[1];
+				UpdateAll();
+			}
+		}
+		xhttp.open("GET", "getValues", true);
+		xhttp.send();
+	}
+</script>
